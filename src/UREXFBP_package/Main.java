@@ -108,7 +108,7 @@ public class Main {
         Connection connection = null;
         try {
             connection = db.getConnection();
-            db.createTable();
+            db.createTable("bankomattable");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -119,6 +119,11 @@ public class Main {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
