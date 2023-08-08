@@ -96,13 +96,29 @@ public class Main {
             i++;
         }
 
+        String[] Month = new String[20];
+        String[] Year = new String[20];
+
+        for (int j = 0; j < VALID.length; j++) {
+            Month[j] = VALID[j].substring(0, 2);
+            Year[j] = VALID[j].substring(3, 5);
+        }
+
         DB db = new DB();
         Connection connection = null;
         try {
             connection = db.getConnection();
+            db.createTable();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        
+
+        for (int j = 0; j < CardNumbers.length; j++) {
+            try {
+                db.InsertDataToTable(CardNumbers[j], Passwords[j], Month[j], Year[j], CVV[j]);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
